@@ -1,8 +1,9 @@
-import { View, Pressable, Text, ScrollView } from "react-native";
+import { View, Pressable, Text, ScrollView, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import ImageEdit from "./ImageEdit";
 import QuizInfo from "./QuizInfo";
 import Questions from "./Questions";
+import { router } from "expo-router";
 
 
 export default function CreateQuizPage() {
@@ -72,6 +73,10 @@ export default function CreateQuizPage() {
     setLength((prevLength) => prevLength + 1);
   }
 
+  function Reset(){
+    router.back()
+  }
+
   return (
     <ScrollView>
       <View className="bg-white h-fit flex flex-col ">
@@ -94,22 +99,22 @@ export default function CreateQuizPage() {
         >
           <Text className="text-white font-bold text-5xl h-10 w-6">+</Text>
         </Pressable>
-        <Pressable
-          onPress={Save}
+        <TouchableOpacity
+          onPress={() => {Save(); Reset()}}
           className="bg-[#412E8B] p-5 w-11/12 mx-auto mt-14 rounded-[5px]"
         >
           <Text className="text-center text-white font-bold text-xl">
             Salvar
           </Text>
-        </Pressable>
-        <Pressable
-          onPress={() => setData([])}
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {setData([]); Reset()}}
           className="border-[#412E8B] border-2 p-5 w-11/12 mx-auto my-3 rounded-[5px]"
         >
           <Text className="text-center text-[#412E8B] font-bold text-xl">
             Cancelar
           </Text>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

@@ -2,6 +2,8 @@ import { Text, View, FlatList, Image, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { router } from "expo-router";
 import styles from "./styles";
 
 type QuizData = {
@@ -38,6 +40,11 @@ export default function ListQuiz() {
     fetchData();
   }, []);
 
+  function Route() {
+    router.push({ pathname: "/pages/CreateQuizPage" });
+    console.log("fui clicado");
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -70,8 +77,8 @@ export default function ListQuiz() {
             </TouchableOpacity>
           )}
         />
-        <TouchableOpacity >
-          <FontAwesome name="plus-square" size={60} color="#412E8B" style={styles.createButton}/>
+        <TouchableOpacity style={styles.createButton} onPress={Route}>
+          <FontAwesome5 name="plus" size={30} color="white" />
         </TouchableOpacity>
       </View>
     </View>
