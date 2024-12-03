@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 200,
     marginBottom: 10,
-    backgroundColor: 'lightgrey'
+    
   },
   title:{
     color: 'white',
@@ -40,11 +40,6 @@ const styles = StyleSheet.create({
   description:{
     color: 'white',
     fontSize: 14
-  },
-  createButton:{
-    position: 'absolute',
-    bottom: 20,
-    left: 300,
   }
 });
 

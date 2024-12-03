@@ -17,16 +17,20 @@ export default function ListQuiz() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://api.jsonbin.io/v3/b/674f426ae41b4d34e45f34e2',{
-          method: "GET",
-          headers: {
-            "X-Access-Key": "$2a$10$gCSm9EzP4f4OevslF6w/oe6rwH0ninVR0BZrSOHyTxw1OR/6EbVj."
+        const response = await fetch(
+          "https://api.jsonbin.io/v3/b/674f426ae41b4d34e45f34e2",
+          {
+            method: "GET",
+            headers: {
+              "X-Access-Key":
+                "$2a$10$gCSm9EzP4f4OevslF6w/oe6rwH0ninVR0BZrSOHyTxw1OR/6EbVj.",
+            },
           }
-        });
+        );
         const data = await response.json();
         console.log(data);
         setQuiz(data.record);
-        console.log("dados recebidos",data.record)
+        console.log("dados recebidos", data.record);
       } catch (error) {
         console.error("erro ao bucar dados", error);
       }
@@ -56,20 +60,18 @@ export default function ListQuiz() {
           renderItem={({ item }) => (
             <TouchableOpacity>
               <View style={styles.quizTemplate}>
-              <Image
-                source={{ uri: item.imageUrl }}
-                style={styles.quizImage}
-              ></Image>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.description}>{item.description}</Text>
-            </View>
+                <Image
+                  source={{ uri: item.imageUrl }}
+                  style={styles.quizImage}
+                ></Image>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.description}>{item.description}</Text>
+              </View>
             </TouchableOpacity>
           )}
         />
-        <TouchableOpacity>
-          <View style={styles.createButton}>
-            <FontAwesome name="plus-square" size={60} color="#412E8B" />
-          </View>
+        <TouchableOpacity >
+          <FontAwesome name="plus-square" size={60} color="#412E8B" style={styles.createButton}/>
         </TouchableOpacity>
       </View>
     </View>
