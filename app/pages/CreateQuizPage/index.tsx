@@ -17,10 +17,50 @@ export default function CreateQuizPage() {
     {
       title: "",
       questImgUrl: "",
-      answers: [{ title: "" }, { title: "" }, { title: "" }, { title: "" }],
+      answers: [
+        { title: "" },
+        { title: "" },
+        { title: "" },
+        { title: "" },
+        { correctIndex: 0 },
+      ],
     },
   ]);
   const [length, setLength] = useState(1);
+
+  function fecthApi(data: object) {
+    fetch("https://api.jsonbin.io/v3/b/674f426ae41b4d34e45f34e2", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key":
+          "$2a$10$wA7.q16e..6iGdIDmRLQqe1LHs5K4js9QjduxP0i6kKS88xN9WuMW",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((resp) => resp.json())
+      .then((data) => console.log(data.record))
+      .catch((err) => console.log(err));
+    // let req = new XMLHttpRequest();
+
+    // req.onreadystatechange = () => {
+    //   if (req.readyState == XMLHttpRequest.DONE) {
+    //     console.log(req.responseText);
+    //   }
+    // };
+
+    // req.open(
+    //   "PUT",
+    //   "https://api.jsonbin.io/v3/b/674f426ae41b4d34e45f34e2",
+    //   true
+    // );
+    // req.setRequestHeader("Content-Type", "application/json");
+    // req.setRequestHeader(
+    //   "X-Master-Key",
+    //   "$2a$10$wA7.q16e..6iGdIDmRLQqe1LHs5K4js9QjduxP0i6kKS88xN9WuMW"
+    // );
+    // req.send(data);
+  }
 
   function Save() {
     const array = data;
@@ -31,7 +71,8 @@ export default function CreateQuizPage() {
       quizData: questions,
     };
     setData(array);
-    console.log(data[0].quizData);
+    console.log(data[0]);
+    fecthApi(data[0]);
   }
 
   function handleAddQuestion() {
@@ -39,7 +80,13 @@ export default function CreateQuizPage() {
     array.push({
       title: "",
       questImgUrl: "",
-      answers: [{ title: "" }, { title: "" }, { title: "" }, { title: "" }],
+      answers: [
+        { title: "" },
+        { title: "" },
+        { title: "" },
+        { title: "" },
+        { correctIndex: 0 },
+      ],
     });
     setQuestions(array);
     setLength((prevLength) => prevLength + 1);
