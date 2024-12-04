@@ -95,6 +95,7 @@ export default function CreateQuizPage() {
 
   function Reset() {
     router.back();
+    router.setParams(data)
   }
 
   return (
