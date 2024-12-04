@@ -1,15 +1,9 @@
-import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { Text, View, Image, TouchableOpacity, ScrollView } from "react-native";
 import { useState, useEffect } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import styles from "./styles";
 
 type QuizData = {
@@ -21,6 +15,9 @@ type QuizData = {
 
 export default function ListQuiz() {
   const [quiz, setQuiz] = useState<QuizData[]>([]);
+  const param = useLocalSearchParams();
+  const user = param.user;
+  console.log(user);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +44,7 @@ export default function ListQuiz() {
   }, []);
 
   function Route() {
-    router.push({ pathname: "/pages/CreateQuizPage" });
+    router.push({ pathname: "/pages/CreateQuizPage", params: { user } });
     console.log("fui clicado");
   }
 
@@ -57,7 +54,7 @@ export default function ListQuiz() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            router.push({pathname: 'pages/Profile'});
+            router.push({ pathname: "pages/Profile" });
           }}
         >
           <FontAwesome name="user-circle-o" size={40} color="white" />
@@ -70,7 +67,12 @@ export default function ListQuiz() {
       <View style={styles.body}>
         <ScrollView>
           {quiz.map((item, index) => (
-            <TouchableOpacity key={index} onPress={() => (router.push({pathname: 'pages/QuizPage', params: {index} }))}>
+            <TouchableOpacity
+              key={index}
+              onPress={() =>
+                router.push({ pathname: "pages/QuizPage", params: { index } })
+              }
+            >
               <View style={styles.quizTemplate}>
                 <Image
                   source={{ uri: item.imageUrl }}
