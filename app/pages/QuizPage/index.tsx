@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Animated } from "react-native-reanimated";
 
 export default function QuizPage() {
   const [quizInfo, setQuizInfo] = useState();
@@ -41,6 +42,7 @@ export default function QuizPage() {
           </Text>
           <Text className="text-xl mx-4  text-[#412E8B]">
             {quizInfo?.description}
+            {console.log(quizInfo?.user)}
           </Text>
         </View>
       </View>
@@ -49,7 +51,7 @@ export default function QuizPage() {
         <View className="flex flex-row items-center mx-4">
           <Ionicons name="person-circle" size={40} color="#412E8B" />
           <Text className="text-lg mx-4 font-semibold  text-[#412E8B]">
-            {quizInfo?.user}
+            {quizInfo?.user == undefined ? "Anônimo" : quizInfo?.user}
           </Text>
         </View>
         <TouchableOpacity className="m-4">
@@ -60,6 +62,7 @@ export default function QuizPage() {
           </View>
         </TouchableOpacity>
       </View>
+      <Animated.View className="bg-transparent h-28 w-28 absolute top-1/2 border-8  border-t-[#412E8B] rounded-full border-l-[#412E8B] border-r-[#412E8B]" />
     </View>
   );
 }

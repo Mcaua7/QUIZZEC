@@ -9,8 +9,10 @@ export default function Profile() {
   const [user, setUser] = useState("Anônimo");
 
   function handleChange(e: string) {
-    setIsChanging(false);
     setUser(e.nativeEvent.text);
+  }
+  function handleSet() {
+    setIsChanging(false);
   }
 
   return (
@@ -30,7 +32,8 @@ export default function Profile() {
         {isChanging == true ? (
           <TextInput
             className="bg-white w-72 p-4 rounded-[5px]"
-            onSubmitEditing={handleChange}
+            onSubmitEditing={handleSet}
+            onChangeText={handleChange}
           />
         ) : (
           <View className="border-[1px] rounded-[5px] border-white w-8/12 flex">
