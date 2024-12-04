@@ -2,6 +2,7 @@ import { View, TouchableOpacity, Text, TextInput } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import React, { useState } from "react";
+import { router } from "expo-router";
 
 export default function Profile() {
   const [isChanging, setIsChanging] = useState(false);
@@ -15,7 +16,7 @@ export default function Profile() {
   return (
     <View className="bg-[#412E8B] h-full flex flex-col items-center w-full">
       <View className="h-fit flex-row-reverse w-full">
-        <TouchableOpacity className="w-[40px] m-4">
+        <TouchableOpacity className="w-[40px] m-4" onPress={() => (router.back())}>
           <FontAwesome5 name="arrow-right" size={40} color="white" />
         </TouchableOpacity>
       </View>

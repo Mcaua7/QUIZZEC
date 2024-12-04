@@ -1,4 +1,10 @@
-import { Text, View, FlatList, Image, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { useState, useEffect } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -51,7 +57,7 @@ export default function ListQuiz() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            console.log(quiz);
+            router.push({pathname: 'pages/Profile'});
           }}
         >
           <FontAwesome name="user-circle-o" size={40} color="white" />
@@ -62,10 +68,9 @@ export default function ListQuiz() {
       </View>
 
       <View style={styles.body}>
-        <FlatList
-          data={quiz}
-          renderItem={({ item }) => (
-            <TouchableOpacity>
+        <ScrollView>
+          {quiz.map((item, index) => (
+            <TouchableOpacity key={index} onPress={() => (router.push({pathname: 'pages/QuizPage', params: {index} }))}>
               <View style={styles.quizTemplate}>
                 <Image
                   source={{ uri: item.imageUrl }}
@@ -75,8 +80,8 @@ export default function ListQuiz() {
                 <Text style={styles.description}>{item.description}</Text>
               </View>
             </TouchableOpacity>
-          )}
-        />
+          ))}
+        </ScrollView>
         <TouchableOpacity style={styles.createButton} onPress={Route}>
           <FontAwesome5 name="plus" size={30} color="white" />
         </TouchableOpacity>
