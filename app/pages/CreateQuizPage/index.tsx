@@ -9,10 +9,13 @@ import React, { useState } from "react";
 import ImageEdit from "./ImageEdit";
 import QuizInfo from "./QuizInfo";
 import Questions from "./Questions";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 
 export default function CreateQuizPage() {
   const [data, setData] = useState([]);
+  const params = useLocalSearchParams();
+  const user = params.user;
+  console.log(user);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -66,6 +69,7 @@ export default function CreateQuizPage() {
   function Save() {
     const array = data;
     array[0] = {
+      user: user,
       title: title,
       description: description,
       imageUrl: imageUrl,
@@ -95,7 +99,7 @@ export default function CreateQuizPage() {
 
   function Reset() {
     router.back();
-    router.setParams(data)
+    router.setParams(data);
   }
 
   return (

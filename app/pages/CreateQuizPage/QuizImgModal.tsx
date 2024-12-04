@@ -6,11 +6,9 @@ export default function QuizImgModal({
   setShowModal,
   setImageUrl,
 }: QuizImgProps) {
-  function handleModal() {
-    setShowModal(false);
-  }
   function handleChange(e: any) {
-    setImageUrl(e);
+    setShowModal(false);
+    setImageUrl(e.nativeEvent.text);
   }
 
   return (
@@ -20,16 +18,8 @@ export default function QuizImgModal({
           <TextInput
             className="full bg-white rounded-[5px]"
             placeholder="Url Da Imagem"
-            onChangeText={handleChange}
+            onSubmitEditing={handleChange}
           />
-          <Pressable
-            onPress={handleModal}
-            className="p-3 bg-green-500 rounded-[5px] mt-2"
-          >
-            <Text className="text-white font-bold text-center text-xl">
-              Enviar Imagem
-            </Text>
-          </Pressable>
         </View>
       </View>
     </Modal>
