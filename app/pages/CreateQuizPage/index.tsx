@@ -29,18 +29,34 @@ export default function CreateQuizPage() {
   const [length, setLength] = useState(1);
 
   function fecthApi(data: object) {
+    let array;
     fetch("https://api.jsonbin.io/v3/b/674f426ae41b4d34e45f34e2", {
-      method: "PUT",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "X-Master-Key":
-          "$2a$10$wA7.q16e..6iGdIDmRLQqe1LHs5K4js9QjduxP0i6kKS88xN9WuMW",
+        "X-Access-Key":
+          "$2a$10$gCSm9EzP4f4OevslF6w/oe6rwH0ninVR0BZrSOHyTxw1OR/6EbVj.",
       },
-      body: JSON.stringify(data),
     })
       .then((resp) => resp.json())
       .then((data) => console.log(data.record))
       .catch((err) => console.log(err));
+      .then((data) => (array = data.record))
+      .then((array) => array.push(data))
+      .finally(() => {
+        fetch("https://api.jsonbin.io/v3/b/674f426ae41b4d34e45f34e2", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Master-Key":
+              "$2a$10$wA7.q16e..6iGdIDmRLQqe1LHs5K4js9QjduxP0i6kKS88xN9WuMW",
+          },
+          body: JSON.stringify(array),
+        })
+          .then((resp) => resp.json())
+          .then((data) => console.log(data.record))
+          .catch((err) => console.log(err));
+      });
   }
 
   function Save() {
@@ -52,7 +68,6 @@ export default function CreateQuizPage() {
       quizData: questions,
     };
     setData(array);
-    console.log(data[0]);
     fecthApi(data[0]);
   }
 
