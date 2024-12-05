@@ -98,8 +98,8 @@ export default function CreateQuizPage() {
   }
 
   function Reset() {
-    router.back();
-    router.setParams(data);
+    router.back()
+
   }
 
   return (
