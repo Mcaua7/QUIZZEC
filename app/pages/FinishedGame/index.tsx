@@ -17,7 +17,9 @@ export default function FinishedGame({
         </Text>
         <View className="w-11/12 bg-[#A498D1] mx-auto rounded-[5px] justify-between items-center">
           <Ionicons name="person-circle" size={140} color="white" />
-          <Text className="text-xl text-[#412E8B] mb-4">{user}</Text>
+          <Text className="text-xl text-[#412E8B] mb-4">
+            {user == "" ? "Anônimo" : user}
+          </Text>
           <View className=" w-full  flex flex-row">
             <View className="bg-[#412E8B] rounded-[5px] m-3 flex-1">
               <View className="flex flex-row justify-center items-center">
