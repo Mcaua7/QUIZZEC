@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-navigation/native": "^7.0.13",
     "expo": "~52.0.11",
     "expo-constants": "~17.0.3",
     "expo-linking": "~7.0.3",

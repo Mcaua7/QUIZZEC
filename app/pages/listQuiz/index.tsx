@@ -5,11 +5,12 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { router } from "expo-router";
+import { useFocusEffect } from "expo-router";
 import styles from "./styles";
 
 type QuizData = {
@@ -21,33 +22,40 @@ type QuizData = {
 
 export default function ListQuiz() {
   const [quiz, setQuiz] = useState<QuizData[]>([]);
+  const [reload, setReload] = useState(0)
+  
+  useFocusEffect(
+    useCallback(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            "https://api.jsonbin.io/v3/b/674f426ae41b4d34e45f34e2",
+            {
+              method: "GET",
+              headers: {
+                "X-Access-Key":
+                  "$2a$10$gCSm9EzP4f4OevslF6w/oe6rwH0ninVR0BZrSOHyTxw1OR/6EbVj.",
+              },
+            }
+          );
+          const data = await response.json();
+          //console.log(data);
+          setQuiz(data.record);
+          console.log("dados recebidos", data.record);
+        } catch (error) {
+          console.error("erro ao bucar dados", error);
+        }
+      };
+      fetchData()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://api.jsonbin.io/v3/b/674f426ae41b4d34e45f34e2",
-          {
-            method: "GET",
-            headers: {
-              "X-Access-Key":
-                "$2a$10$gCSm9EzP4f4OevslF6w/oe6rwH0ninVR0BZrSOHyTxw1OR/6EbVj.",
-            },
-          }
-        );
-        const data = await response.json();
-        console.log(data);
-        setQuiz(data.record);
-        console.log("dados recebidos", data.record);
-      } catch (error) {
-        console.error("erro ao bucar dados", error);
+      return () => {
+        console.log('unfocus')
       }
-    };
-    fetchData();
-  }, []);
+    }, [])
+  )
 
   function Route() {
-    router.push({ pathname: "/pages/CreateQuizPage" });
+    router.navigate({ pathname: "/pages/CreateQuizPage"});
     console.log("fui clicado");
   }
 
