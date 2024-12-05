@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     paddingTop: 40,
+    display: "flex",
   },
   quizTemplate: {
     margin: 10,
