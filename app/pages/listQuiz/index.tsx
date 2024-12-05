@@ -4,6 +4,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { useState, useEffect, useCallback } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
@@ -47,6 +48,7 @@ export default function ListQuiz() {
       };
       fetchData()
 
+
       return () => {
         console.log('unfocus')
       }
@@ -54,7 +56,8 @@ export default function ListQuiz() {
   )
 
   function Route() {
-    router.navigate({ pathname: "/pages/CreateQuizPage"});
+    router.push({ pathname: "/pages/CreateQuizPage", params: { user } });
+
     console.log("fui clicado");
   }
 
@@ -64,7 +67,7 @@ export default function ListQuiz() {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            router.push({pathname: 'pages/Profile'});
+            router.push({ pathname: "pages/Profile" });
           }}
         >
           <FontAwesome name="user-circle-o" size={40} color="white" />
@@ -73,22 +76,33 @@ export default function ListQuiz() {
           <MaterialCommunityIcons name="qrcode-scan" size={40} color="white" />
         </TouchableOpacity>
       </View>
-
       <View style={styles.body}>
-        <ScrollView>
-          {quiz.map((item, index) => (
-            <TouchableOpacity key={index} onPress={() => (router.push({pathname: 'pages/QuizPage', params: {index} }))}>
-              <View style={styles.quizTemplate}>
-                <Image
-                  source={{ uri: item.imageUrl }}
-                  style={styles.quizImage}
-                ></Image>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.description}>{item.description}</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+        {quiz.length === 0 ? (
+          <ActivityIndicator className="my-auto" size="large" color="#412E8B" />
+        ) : (
+          <ScrollView>
+            {quiz.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() =>
+                  router.push({
+                    pathname: "pages/QuizPage",
+                    params: { index },
+                  })
+                }
+              >
+                <View style={styles.quizTemplate}>
+                  <Image
+                    source={{ uri: item.imageUrl }}
+                    style={styles.quizImage}
+                  ></Image>
+                  <Text style={styles.title}>{item.title}</Text>
+                  <Text style={styles.description}>{item.description}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        )}
         <TouchableOpacity style={styles.createButton} onPress={Route}>
           <FontAwesome5 name="plus" size={30} color="white" />
         </TouchableOpacity>

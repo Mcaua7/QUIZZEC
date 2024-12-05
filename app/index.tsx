@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import ListQuiz from "./pages/listQuiz";
 import Profile from "./pages/Profile";
+import QuizPage from "./pages/QuizPage";
 
 export default function Page() {
   return (
