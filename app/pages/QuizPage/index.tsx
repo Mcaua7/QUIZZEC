@@ -16,6 +16,7 @@ export default function QuizPage() {
   const [showModal, setShowModal] = useState(false);
   const params = useLocalSearchParams();
   const index = params.index;
+  const user = params.user;
 
   useEffect(() => {
     fetch("https://api.jsonbin.io/v3/b/674f426ae41b4d34e45f34e2", {
@@ -66,6 +67,7 @@ export default function QuizPage() {
               </Text>
             </View>
             <GameModal
+              user={user}
               quizInfo={JSON.stringify(quizInfo)}
               setShowModal={setShowModal}
               ShowModal={showModal}

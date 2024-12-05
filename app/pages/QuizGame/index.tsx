@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
-import { router, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
+import FinishedGame from "../FinishedGame";
 
 export default function QuizGame() {
   const params = useLocalSearchParams();
   const quizInfo = params.quizInfo;
+  const user = params.user;
   const obj = JSON.parse(quizInfo);
   const [quizGame, setQuizGame] = useState(obj.quizData);
   const [question, setQuestion] = useState(1);
@@ -35,9 +37,9 @@ export default function QuizGame() {
 
   return (
     <View className="h-full w-screen justify-center items-center">
-      <View className=" w-full  p-2">
+      <View className=" w-full ">
         {question <= quizGame.length ? (
-          <View>
+          <View className=" p-2">
             <View className="flex-row flex items-center">
               <View className="h-10 w-10 bg-[#F8E607] rounded-full flex justify-center">
                 <Text className="text-center font-bold text-xl ">
@@ -80,7 +82,7 @@ export default function QuizGame() {
             )}
           </View>
         ) : (
-          <Text>{pontos}</Text>
+          <FinishedGame pontos={pontos} length={quizGame.length} user={user} />
         )}
       </View>
     </View>
