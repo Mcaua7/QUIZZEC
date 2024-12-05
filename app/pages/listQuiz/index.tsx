@@ -12,6 +12,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { router, useLocalSearchParams } from "expo-router";
 import { useFocusEffect } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import styles from "./styles";
 
 type QuizData = {
@@ -23,8 +24,10 @@ type QuizData = {
 
 export default function ListQuiz() {
   const [quiz, setQuiz] = useState<QuizData[]>([]);
+
   const params = useLocalSearchParams();
   const user = params.user;
+
   useFocusEffect(
     useCallback(() => {
       const fetchData = async () => {
@@ -53,6 +56,7 @@ export default function ListQuiz() {
         console.log("unfocus");
       };
     }, [])
+
   );
 
   function Route() {
@@ -72,7 +76,7 @@ export default function ListQuiz() {
         >
           <FontAwesome name="user-circle-o" size={40} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => {router.push({pathname: 'pages/qrCodeReader'})}}>
           <MaterialCommunityIcons name="qrcode-scan" size={40} color="white" />
         </TouchableOpacity>
       </View>
