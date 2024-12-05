@@ -22,7 +22,6 @@ type QuizData = {
 
 export default function ListQuiz() {
   const [quiz, setQuiz] = useState<QuizData[]>([]);
-  const [reload, setReload] = useState(0)
   
   useFocusEffect(
     useCallback(() => {
