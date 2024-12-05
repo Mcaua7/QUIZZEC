@@ -65,7 +65,11 @@ export default function QuizPage() {
                 {quizInfo?.user == undefined ? "Anônimo" : quizInfo?.user}
               </Text>
             </View>
-            <GameModal setShowModal={setShowModal} ShowModal={showModal} />
+            <GameModal
+              quizInfo={JSON.stringify(quizInfo)}
+              setShowModal={setShowModal}
+              ShowModal={showModal}
+            />
             <TouchableOpacity
               className="m-4"
               onPress={() => setShowModal(true)}
