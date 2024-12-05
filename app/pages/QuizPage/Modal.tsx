@@ -6,6 +6,7 @@ export default function GameModal({
   ShowModal,
   setShowModal,
   quizInfo,
+  user,
 }: GameModalProps) {
   return (
     <Modal
@@ -19,7 +20,10 @@ export default function GameModal({
           <TouchableOpacity
             className="bg-[#412E8B] p-4 rounded-[5px]"
             onPress={() =>
-              router.push({ pathname: "pages/QuizGame", params: { quizInfo } })
+              router.push({
+                pathname: "pages/QuizGame",
+                params: { quizInfo, user },
+              })
             }
           >
             <Text className="text-center text-white text-lg">Solo</Text>
@@ -37,4 +41,5 @@ type GameModalProps = {
   ShowModal: boolean;
   setShowModal: Function;
   quizInfo: string;
+  user: string;
 };

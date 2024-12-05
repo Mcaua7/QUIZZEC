@@ -10,7 +10,7 @@ import { useState, useEffect, useCallback } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useFocusEffect } from "expo-router";
 import styles from "./styles";
 
@@ -23,7 +23,8 @@ type QuizData = {
 
 export default function ListQuiz() {
   const [quiz, setQuiz] = useState<QuizData[]>([]);
-  
+  const params = useLocalSearchParams();
+  const user = params.user;
   useFocusEffect(
     useCallback(() => {
       const fetchData = async () => {
@@ -46,14 +47,13 @@ export default function ListQuiz() {
           console.error("erro ao bucar dados", error);
         }
       };
-      fetchData()
-
+      fetchData();
 
       return () => {
-        console.log('unfocus')
-      }
+        console.log("unfocus");
+      };
     }, [])
-  )
+  );
 
   function Route() {
     router.push({ pathname: "/pages/CreateQuizPage", params: { user } });
@@ -87,7 +87,7 @@ export default function ListQuiz() {
                   onPress={() =>
                     router.push({
                       pathname: "pages/QuizPage",
-                      params: { index },
+                      params: { index, user },
                     })
                   }
                 >
