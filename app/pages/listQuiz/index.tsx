@@ -82,24 +82,25 @@ export default function ListQuiz() {
         ) : (
           <ScrollView>
             {quiz.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() =>
-                  router.push({
-                    pathname: "pages/QuizPage",
-                    params: { index },
-                  })
-                }
-              >
-                <View style={styles.quizTemplate}>
-                  <Image
-                    source={{ uri: item.imageUrl }}
-                    style={styles.quizImage}
-                  ></Image>
-                  <Text style={styles.title}>{item.title}</Text>
-                  <Text style={styles.description}>{item.description}</Text>
-                </View>
-              </TouchableOpacity>
+              <View key={index}>
+                <TouchableOpacity
+                  onPress={() =>
+                    router.push({
+                      pathname: "pages/QuizPage",
+                      params: { index },
+                    })
+                  }
+                >
+                  <View style={styles.quizTemplate}>
+                    <Image
+                      source={{ uri: item.imageUrl }}
+                      style={styles.quizImage}
+                    ></Image>
+                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.description}>{item.description}</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
             ))}
           </ScrollView>
         )}
