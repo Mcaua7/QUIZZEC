@@ -16,6 +16,7 @@ export default function QuizPage() {
   const [showModal, setShowModal] = useState(false);
   const params = useLocalSearchParams();
   const index = params.index;
+  const user = params.user;
 
   useEffect(() => {
     fetch("https://api.jsonbin.io/v3/b/674f426ae41b4d34e45f34e2", {
@@ -65,7 +66,12 @@ export default function QuizPage() {
                 {quizInfo?.user == undefined ? "Anônimo" : quizInfo?.user}
               </Text>
             </View>
-            <GameModal setShowModal={setShowModal} ShowModal={showModal} />
+            <GameModal
+              user={user}
+              quizInfo={JSON.stringify(quizInfo)}
+              setShowModal={setShowModal}
+              ShowModal={showModal}
+            />
             <TouchableOpacity
               className="m-4"
               onPress={() => setShowModal(true)}

@@ -9,7 +9,7 @@ export default function Profile() {
   const [user, setUser] = useState("Anônimo");
 
   function handleChange(e: string) {
-    setUser(e.nativeEvent.text);
+    setUser(e);
   }
   function handleSet() {
     setIsChanging(false);
