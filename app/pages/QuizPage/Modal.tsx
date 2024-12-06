@@ -26,7 +26,7 @@ export default function GameModal({
               })
             }
           >
-            <Text className="text-center text-white text-lg">Solo</Text>
+            <Text className="text-center text-white text-lg">Jogar</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
@@ -37,7 +37,7 @@ export default function GameModal({
             }
             className="mt-1 bg-[#412E8B] p-4 rounded-[5px]"
           >
-            <Text className="text-center text-white text-lg">Online</Text>
+            <Text className="text-center text-white text-lg">Compartilhar</Text>
           </TouchableOpacity>
         </View>
       </View>
