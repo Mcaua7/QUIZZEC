@@ -18,7 +18,9 @@ export default function OnlineRoom() {
           <FontAwesome5 name="arrow-left" size={40} color="white" />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => router.push({ pathname: "pages/OnlineRoomInside" })}
+      >
         <View className="w-11/12 h-80 mx-auto my-16">
           <Text className="text-white text-lg m-2">
             clique no QRCODE para visualizar a Sala
