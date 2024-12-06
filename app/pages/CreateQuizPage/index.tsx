@@ -9,9 +9,11 @@ import React, { useState } from "react";
 import ImageEdit from "./ImageEdit";
 import QuizInfo from "./QuizInfo";
 import Questions from "./Questions";
+import Toast from "react-native-toast-message";
 import { router, useLocalSearchParams } from "expo-router";
 
 export default function CreateQuizPage() {
+  const [isValid, setIsValid] = useState(false);
   const [data, setData] = useState([]);
   const params = useLocalSearchParams();
   const user = params.user;
@@ -65,7 +67,6 @@ export default function CreateQuizPage() {
           .catch((err) => console.log(err));
       });
   }
-
   function Save() {
     const array = data;
     array[0] = {
@@ -75,9 +76,53 @@ export default function CreateQuizPage() {
       imageUrl: imageUrl,
       quizData: questions,
     };
-    setData(array);
-    fecthApi(data[0]);
-    Reset();
+    console.log(array);
+    let itemErro = [];
+    let erro = [];
+    let erroGeral = false;
+    if (array[0].description == "" || array[0].title == "") {
+      erroGeral = true;
+      Toast.show({
+        type: "error",
+        text1: "Erro nas Definições do Quiz",
+        text2: "O Titulo e/ou Descrição não podem ser vazias",
+      });
+    }
+    for (let i = 0; i < array[0].quizData.length; i++) {
+      if (array[0].quizData[i].title == "") {
+        erro.push(i + 1);
+        erroGeral = true;
+        console.log(erro);
+      }
+      if (
+        array[0].quizData[i].answers[0].title == "" ||
+        array[0].quizData[i].answers[1].title == "" ||
+        array[0].quizData[i].answers[2].title == "" ||
+        array[0].quizData[i].answers[3].title == ""
+      ) {
+        itemErro.push(i + 1);
+        erroGeral = true;
+      }
+      if (erro.length !== 0) {
+        Toast.show({
+          type: "error",
+          text1: `Erro na Questão ${erro}`,
+          text2: `As Respectivas Questões não podem ter campos vazios`,
+        });
+      }
+      if (itemErro.length !== 0) {
+        Toast.show({
+          type: "error",
+          text1: `Erro na Questão ${itemErro}`,
+          text2: `Os Itens não podem ser vazios`,
+        });
+      }
+    }
+    if (erroGeral == false) {
+      setData(array);
+      fecthApi(data[0]);
+      Reset();
+    }
   }
 
   function handleAddQuestion() {
@@ -98,52 +143,55 @@ export default function CreateQuizPage() {
   }
 
   function Reset() {
-    router.back()
-
+    router.back();
   }
 
   return (
-    <ScrollView>
-      <View className="bg-white h-fit flex flex-col ">
-        <ImageEdit imageUrl={imageUrl} setImageUrl={setImageUrl} />
-        <QuizInfo setTitle={setTitle} setDescription={setDescription} />
-        <View className="flex flex-col">
-          {questions.map((items, index) => (
-            <Questions
-              setQuestions={setQuestions}
-              questions={questions}
-              items={items}
-              index={index}
-              key={index}
-            />
-          ))}
+    <View>
+      <ScrollView>
+        <View className="bg-white h-fit flex flex-col ">
+          <ImageEdit imageUrl={imageUrl} setImageUrl={setImageUrl} />
+          <QuizInfo setTitle={setTitle} setDescription={setDescription} />
+          <View className="flex flex-col">
+            {questions.map((items, index) => (
+              <Questions
+                setQuestions={setQuestions}
+                questions={questions}
+                items={items}
+                index={index}
+                key={index}
+              />
+            ))}
+          </View>
+          <Pressable
+            onPress={handleAddQuestion}
+            className="bg-[#412E8B] justify-center items-center mt-3 w-11/12 mx-auto rounded-[5px] flex p-2"
+          >
+            <Text className="text-white font-bold text-5xl h-10 w-6">+</Text>
+          </Pressable>
+
+          <TouchableOpacity
+            onPress={Save}
+            className="bg-[#412E8B] p-5 w-11/12 mx-auto mt-14 rounded-[5px]"
+          >
+            <Text className="text-center text-white font-bold text-xl">
+              Salvar
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setData([]);
+              Reset();
+            }}
+            className="border-[#412E8B] border-2 p-5 w-11/12 mx-auto my-3 rounded-[5px]"
+          >
+            <Text className="text-center text-[#412E8B] font-bold text-xl">
+              Cancelar
+            </Text>
+          </TouchableOpacity>
         </View>
-        <Pressable
-          onPress={handleAddQuestion}
-          className="bg-[#412E8B] justify-center items-center mt-3 w-11/12 mx-auto rounded-[5px] flex p-2"
-        >
-          <Text className="text-white font-bold text-5xl h-10 w-6">+</Text>
-        </Pressable>
-        <TouchableOpacity
-          onPress={Save}
-          className="bg-[#412E8B] p-5 w-11/12 mx-auto mt-14 rounded-[5px]"
-        >
-          <Text className="text-center text-white font-bold text-xl">
-            Salvar
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            setData([]);
-            Reset();
-          }}
-          className="border-[#412E8B] border-2 p-5 w-11/12 mx-auto my-3 rounded-[5px]"
-        >
-          <Text className="text-center text-[#412E8B] font-bold text-xl">
-            Cancelar
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <Toast />
+    </View>
   );
 }
