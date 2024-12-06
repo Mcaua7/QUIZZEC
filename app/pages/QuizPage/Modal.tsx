@@ -28,7 +28,15 @@ export default function GameModal({
           >
             <Text className="text-center text-white text-lg">Solo</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="mt-1 bg-[#412E8B] p-4 rounded-[5px]">
+          <TouchableOpacity
+            onPress={() =>
+              router.push({
+                pathname: "pages/OnlineRoom",
+                params: { quizInfo, user },
+              })
+            }
+            className="mt-1 bg-[#412E8B] p-4 rounded-[5px]"
+          >
             <Text className="text-center text-white text-lg">Online</Text>
           </TouchableOpacity>
         </View>
