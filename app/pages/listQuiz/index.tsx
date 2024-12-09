@@ -84,7 +84,7 @@ export default function ListQuiz() {
         </View>
         <TouchableOpacity
           onPress={() => {
-            router.push({ pathname: "pages/QrCodeReader" });
+            router.push({ pathname: "pages/qrCodeReader" });
           }}
         >
           <MaterialCommunityIcons name="qrcode-scan" size={40} color="white" />
