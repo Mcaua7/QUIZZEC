@@ -5,9 +5,9 @@ import { router } from "expo-router";
 export default function GameModal({
   ShowModal,
   setShowModal,
-  quizInfo,
+  string,
   user,
-  index
+  index,
 }: GameModalProps) {
   return (
     <Modal
@@ -20,12 +20,7 @@ export default function GameModal({
         <View className="bg-white p-1 my-auto w-11/12 mx-auto rounded-[5px]">
           <TouchableOpacity
             className="bg-[#412E8B] p-4 rounded-[5px]"
-            onPress={() =>
-              router.push({
-                pathname: "pages/QuizGame",
-                params: { quizInfo, user },
-              })
-            }
+            onPress={() => alert("nao funciona")}
           >
             <Text className="text-center text-white text-lg">Jogar</Text>
           </TouchableOpacity>
@@ -49,6 +44,6 @@ export default function GameModal({
 type GameModalProps = {
   ShowModal: boolean;
   setShowModal: Function;
-  quizInfo: string;
+  string: string;
   user: string;
 };
