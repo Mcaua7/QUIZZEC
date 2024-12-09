@@ -10,6 +10,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import GameModal from "./Modal";
+import Animated from "react-native-reanimated";
 
 export default function QuizPage() {
   const [quizInfo, setQuizInfo] = useState([]);

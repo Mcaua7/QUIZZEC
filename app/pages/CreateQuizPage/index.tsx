@@ -13,7 +13,7 @@ import Toast from "react-native-toast-message";
 import { router, useLocalSearchParams } from "expo-router";
 
 export default function CreateQuizPage() {
-  const [isValid, setIsValid] = useState(false);
+  const [isDisable, setIsDisable] = useState(false);
   const [data, setData] = useState([]);
   const params = useLocalSearchParams();
   const user = params.user;
@@ -100,28 +100,33 @@ export default function CreateQuizPage() {
         array[0].quizData[i].answers[2].title == "" ||
         array[0].quizData[i].answers[3].title == ""
       ) {
-        itemErro.push(i + 1);
+        erro.push(i + 1);
         erroGeral = true;
       }
       if (erro.length !== 0) {
+        const questions = new Set(erro);
+        const newQuestions = Array.from(questions);
+
         Toast.show({
           type: "error",
-          text1: `Erro na Questão ${erro}`,
-          text2: `As Respectivas Questões não podem ter campos vazios`,
-        });
-      }
-      if (itemErro.length !== 0) {
-        Toast.show({
-          type: "error",
-          text1: `Erro na Questão ${itemErro}`,
-          text2: `Os Itens não podem ser vazios`,
+          text1: `Erro na Questão ${newQuestions}`,
+          text2: `As Respectivas Questões não podem ter titulo ou itens vazios`,
         });
       }
     }
     if (erroGeral == false) {
+      setIsDisable(true);
+      console.log("funcão executada com sucesso");
       setData(array);
       fecthApi(data[0]);
-      Reset();
+      Toast.show({
+        type: "success",
+        text1: `Execução Bem Sucedida`,
+        text2: `Quiz Cadastrado Com Sucesso`,
+      });
+      setTimeout(() => {
+        Reset();
+      }, 2000);
     }
   }
 
@@ -172,6 +177,7 @@ export default function CreateQuizPage() {
 
           <TouchableOpacity
             onPress={Save}
+            disabled={isDisable}
             className="bg-[#412E8B] p-5 w-11/12 mx-auto mt-14 rounded-[5px]"
           >
             <Text className="text-center text-white font-bold text-xl">

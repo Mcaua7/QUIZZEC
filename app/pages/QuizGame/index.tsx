@@ -59,25 +59,27 @@ export default function QuizGame() {
             {quizGame[question - 1].answers.map(
               (item: object, index: number) =>
                 item.title && (
-                  <TouchableOpacity
-                    disabled={clikedButton.disable}
-                    onPress={() => handleSend(index)}
-                    key={index}
-                    className={
-                      " rounded-[5px] my-1 p-6 " +
-                      (clikedButton.disable == true
-                        ? index == correct
-                          ? "bg-green-500"
-                          : clikedButton.index == index &&
-                            clikedButton.index !== correct &&
-                            "bg-red-500"
-                        : "bg-[#412E8B]")
-                    }
-                  >
-                    <Text className="text-white text-center font-bold text-md">
-                      {item.title}
-                    </Text>
-                  </TouchableOpacity>
+                  <View key={index}>
+                    <TouchableOpacity
+                      disabled={clikedButton.disable}
+                      onPress={() => handleSend(index)}
+                      key={index}
+                      className={
+                        " rounded-[5px] my-1 p-6 " +
+                        (clikedButton.disable == true
+                          ? index == correct
+                            ? "bg-green-500"
+                            : clikedButton.index == index &&
+                              clikedButton.index !== correct &&
+                              "bg-red-500"
+                          : "bg-[#412E8B]")
+                      }
+                    >
+                      <Text className="text-white text-center font-bold text-md">
+                        {item.title}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 )
             )}
           </View>
