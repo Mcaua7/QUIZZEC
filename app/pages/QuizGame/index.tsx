@@ -5,7 +5,7 @@ import FinishedGame from "../FinishedGame";
 
 export default function QuizGame() {
   const params = useLocalSearchParams();
-  const quizInfo = params.quizInfo;
+  const quizInfo = params.string;
   const user = params.user;
   const obj = JSON.parse(quizInfo);
   const [quizGame, setQuizGame] = useState(obj.quizData);
