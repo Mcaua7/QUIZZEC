@@ -7,6 +7,7 @@ export default function GameModal({
   setShowModal,
   quizInfo,
   user,
+  index
 }: GameModalProps) {
   return (
     <Modal
@@ -26,10 +27,18 @@ export default function GameModal({
               })
             }
           >
-            <Text className="text-center text-white text-lg">Solo</Text>
+            <Text className="text-center text-white text-lg">Jogar</Text>
           </TouchableOpacity>
-          <TouchableOpacity className="mt-1 bg-[#412E8B] p-4 rounded-[5px]">
-            <Text className="text-center text-white text-lg">Online</Text>
+          <TouchableOpacity
+            onPress={() =>
+              router.push({
+                pathname: "pages/QrCodeGenerator",
+                params: { quizInfo, user, index },
+              })
+            }
+            className="mt-1 bg-[#412E8B] p-4 rounded-[5px]"
+          >
+            <Text className="text-center text-white text-lg">Compartilhar</Text>
           </TouchableOpacity>
         </View>
       </View>

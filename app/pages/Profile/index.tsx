@@ -43,8 +43,9 @@ export default function Profile() {
           </View>
         )}
       </TouchableOpacity>
-      <Text className="text-white mt-4">
-        Clique na seção acima para Editar o seu Nome
+      <Text className="text-white mt-4 w-8/12">
+        Clique na seção acima e aperte "Done" em seu teclado para Editar o seu
+        Nome
       </Text>
     </View>
   );
