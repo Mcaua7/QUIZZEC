@@ -1,14 +1,18 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { useEffect } from "react";
+import QRCode from "react-native-qrcode-svg";
 
-export default function OnlineRoom() {
+export default function QroCodeGenerator() {
   const params = useLocalSearchParams();
-  const user = params.user;
-  const quizInfo = params.quizInfo;
+  let logo = require("../../../assets/QUIZZEC.png");
+  const index = params.index
+  const user = params?.user == undefined ? "Anônimo" : params?.user
+  console.log(user)
+  const data = {user, index}
+  const QrCode = JSON.stringify(data)
+  console.log('data', QrCode)
 
-  useEffect(() => {}, []);
   function GoBack() {
     router.back();
   }
@@ -21,7 +25,8 @@ export default function OnlineRoom() {
         </TouchableOpacity>
       </View>
       <View className="w-11/12 h-80 mx-auto my-16">
-        <View className="w-full bg-gray-500 h-full  "></View>
+        {/* <View className="w-full bg-gray-500 h-full  "></View> */}
+        <QRCode value={QrCode} logo={logo} size={350}/>
         <Text className="text-white text-lg m-2">
           Compartilhe o QRCODE para seus amigos para que eles possam acessar o
           Quiz também
