@@ -90,7 +90,7 @@ export default function ListQuiz() {
           <MaterialCommunityIcons name="qrcode-scan" size={40} color="white" />
         </TouchableOpacity>
       </View>
-      <View className="flex-1 pt-[40px] flex">
+      <View className="flex-1 pt-[1px] flex">
         {quiz.length === 0 ? (
           <ActivityIndicator className="my-auto" size="large" color="#412E8B" />
         ) : (
@@ -113,10 +113,19 @@ export default function ListQuiz() {
                       }}
                     >
                       <View className="m-[10px] border-[1px] bg-[#412E8B] items-start p-[10px]">
-                        <Image
-                          className="w-full border-[1px] h-[200px] mb-[10px] bg-[#d8d8d8]"
-                          source={{ uri: item.imageUrl }}
-                        ></Image>
+                        {item.imageUrl ? (
+                          <Image
+                            className="w-full border-[1px] h-[200px] mb-[10px] bg-[#d8d8d8]"
+                            source={{ uri: item.imageUrl }}
+                          ></Image>
+                        ) : (
+                          <View className="w-full border-[1px] border-[#929292] h-[200px] mb-[10px] justify-center items-center bg-[#323f61]">
+                            <Image
+                              className="h-28 w-28"
+                              source={require("../../../assets/QUIZZEC-whihout-bg.png")}
+                            />
+                          </View>
+                        )}
                         <Text className="text-white text-[30px]">
                           {item.title}
                         </Text>
