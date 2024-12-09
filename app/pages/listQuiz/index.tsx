@@ -6,7 +6,7 @@ import {
   ScrollView,
   ActivityIndicator,
 } from "react-native";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -76,7 +76,7 @@ export default function ListQuiz() {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            router.push({ pathname: "pages/qrCodeReader" });
+            router.push({ pathname: "pages/QrCodeReader" });
           }}
         >
           <MaterialCommunityIcons name="qrcode-scan" size={40} color="white" />

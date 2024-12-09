@@ -68,6 +68,7 @@ export default function QuizPage() {
             </View>
             <GameModal
               user={user}
+              index={index}
               quizInfo={JSON.stringify(quizInfo)}
               setShowModal={setShowModal}
               ShowModal={showModal}

@@ -7,6 +7,7 @@ export default function GameModal({
   setShowModal,
   quizInfo,
   user,
+  index
 }: GameModalProps) {
   return (
     <Modal
@@ -31,8 +32,8 @@ export default function GameModal({
           <TouchableOpacity
             onPress={() =>
               router.push({
-                pathname: "pages/OnlineRoom",
-                params: { quizInfo, user },
+                pathname: "pages/QrCodeGenerator",
+                params: { quizInfo, user, index },
               })
             }
             className="mt-1 bg-[#412E8B] p-4 rounded-[5px]"
