@@ -51,10 +51,19 @@ export default function QuizPage() {
               </TouchableOpacity>
             </View>
             <View>
-              <Image
-                className="w-screen bg-gray-500 h-60"
-                source={{ uri: quizInfo?.imageUrl }}
-              />
+              {quizInfo.imageUrl ? (
+                <Image
+                  className="w-full border-[1px] h-[200px] mb-[10px] bg-[#d8d8d8]"
+                  source={{ uri: quizInfo.imageUrl }}
+                ></Image>
+              ) : (
+                <View className="w-full border-[1px] border-[#929292] h-[200px] mb-[10px] justify-center items-center bg-[#323f61]">
+                  <Image
+                    className="h-28 w-28"
+                    source={require("../../../assets/QUIZZEC-whihout-bg.png")}
+                  />
+                </View>
+              )}
               <Text className="text-4xl mx-4 my-2 text-[#412E8B] font-bold">
                 {quizInfo?.title}
               </Text>
