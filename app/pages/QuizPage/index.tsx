@@ -9,12 +9,10 @@ import {
 import { router, useLocalSearchParams } from "expo-router";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import GameModal from "./Modal";
-import Animated from "react-native-reanimated";
+import Entypo from "@expo/vector-icons/Entypo";
 
 export default function QuizPage() {
   const [quizInfo, setQuizInfo] = useState([]);
-  const [showModal, setShowModal] = useState(false);
   const params = useLocalSearchParams();
   const index = params.index;
   const user = params.user;
@@ -32,6 +30,13 @@ export default function QuizPage() {
   }, []);
   function GoBack() {
     router.back();
+  }
+  function startGame() {
+    const string = JSON.stringify(quizInfo);
+    router.push({
+      pathname: "pages/QuizGame",
+      params: { string, user },
+    });
   }
   return (
     <View className="h-full w-screen flex justify-center items">
@@ -61,26 +66,28 @@ export default function QuizPage() {
           </View>
           <View>
             <Text className="mx-5 mt-8 text-[#412E8B]">Criado por:</Text>
-            <View className="flex flex-row items-center mx-4">
-              <Ionicons name="person-circle" size={40} color="#412E8B" />
-              <Text className="text-lg mx-4 font-semibold  text-[#412E8B]">
-                {quizInfo?.user == undefined ? "Anônimo" : quizInfo?.user}
-              </Text>
+            <View className="flex flex-row justify-between items-center mx-4">
+              <View className="flex flex-row items-center">
+                <Ionicons name="person-circle" size={40} color="#412E8B" />
+                <Text className="text-lg mx-4 font-semibold  text-[#412E8B]">
+                  {quizInfo?.user == undefined ? "Anônimo" : quizInfo?.user}
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() =>
+                  router.push({
+                    pathname: "pages/QrCodeGenerator",
+                    params: { quizInfo, user, index },
+                  })
+                }
+              >
+                <Entypo name="share" size={35} color="#412E8B" />
+              </TouchableOpacity>
             </View>
-            <GameModal
-              user={user}
-              index={index}
-              quizInfo={JSON.stringify(quizInfo)}
-              setShowModal={setShowModal}
-              ShowModal={showModal}
-            />
-            <TouchableOpacity
-              className="m-4"
-              onPress={() => setShowModal(true)}
-            >
+            <TouchableOpacity className="m-4" onPress={startGame}>
               <View className="bg-[#412E8B] p-6 rounded-[5px]">
                 <Text className="text-white text-center font-bold text-xl">
-                  Iniciar
+                  Jogar
                 </Text>
               </View>
             </TouchableOpacity>
