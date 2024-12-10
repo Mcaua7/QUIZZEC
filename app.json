@@ -18,9 +18,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/QUIZZEC.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
+      "package": "com.renan_soares_souza.QUIZZEC"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -28,6 +32,15 @@
     "plugins": [
       "expo-router",
       "expo-barcode-scanner"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "4f216c7a-3401-4aba-8732-4d1bfe16fe53"
+      }
+    },
+    "owner": "renan_soares_souza"
   }
 }

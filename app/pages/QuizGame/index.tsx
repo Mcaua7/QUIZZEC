@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import FinishedGame from "../FinishedGame";
+import Animated, { FadeIn } from "react-native-reanimated";
 
 export default function QuizGame() {
   const params = useLocalSearchParams();
@@ -36,17 +37,20 @@ export default function QuizGame() {
   }
 
   return (
-    <View className="h-full w-screen justify-center items-center">
+    <View className="h-full bg-[#412E8B] w-screen justify-center items-center">
       <View className=" w-full ">
         {question <= quizGame.length ? (
-          <View className=" p-2">
-            <View className="flex-row flex items-center">
+          <Animated.View
+            entering={FadeIn.duration(500)}
+            className="bg-white rounded-[5px] m-1 p-2"
+          >
+            <View className="flex-row flex items-center mb-1">
               <View className="h-10 w-10 bg-[#F8E607] rounded-full flex justify-center">
-                <Text className="text-center font-bold text-xl ">
+                <Text className="text-center text-[#412E8B] font-bold text-xl ">
                   {question}
                 </Text>
               </View>
-              <Text className="font-semibold text-lg w-12/12 mx-3">
+              <Text className="font-semibold text-lg text-[#412E8B] w-12/12 mx-3">
                 {quizGame[question - 1].title}
               </Text>
             </View>
@@ -82,7 +86,7 @@ export default function QuizGame() {
                   </View>
                 )
             )}
-          </View>
+          </Animated.View>
         ) : (
           <FinishedGame pontos={pontos} length={quizGame.length} user={user} />
         )}

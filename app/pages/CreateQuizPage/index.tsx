@@ -77,7 +77,6 @@ export default function CreateQuizPage() {
       quizData: questions,
     };
     console.log(array);
-    let itemErro = [];
     let erro = [];
     let erroGeral = false;
     if (array[0].description == "" || array[0].title == "") {
@@ -114,7 +113,7 @@ export default function CreateQuizPage() {
         });
       }
     }
-    if (erroGeral == false) {
+    if (erroGeral === false) {
       setIsDisable(true);
       console.log("funcão executada com sucesso");
       setData(array);
@@ -146,6 +145,16 @@ export default function CreateQuizPage() {
     setQuestions(array);
     setLength((prevLength) => prevLength + 1);
   }
+  function handleRemoveQuestion(index: number) {
+    const array = questions;
+    console.log(index);
+    if (array.length > 1) {
+      array.splice(index, 1);
+      setQuestions(array);
+      setLength((prevLength) => prevLength - 1);
+      console.log(questions);
+    }
+  }
 
   function Reset() {
     router.back();
@@ -160,6 +169,7 @@ export default function CreateQuizPage() {
           <View className="flex flex-col">
             {questions.map((items, index) => (
               <Questions
+                remove={handleRemoveQuestion}
                 setQuestions={setQuestions}
                 questions={questions}
                 items={items}
@@ -168,12 +178,12 @@ export default function CreateQuizPage() {
               />
             ))}
           </View>
-          <Pressable
+          <TouchableOpacity
             onPress={handleAddQuestion}
             className="bg-[#412E8B] justify-center items-center mt-3 w-11/12 mx-auto rounded-[5px] flex p-2"
           >
             <Text className="text-white font-bold text-5xl h-10 w-6">+</Text>
-          </Pressable>
+          </TouchableOpacity>
 
           <TouchableOpacity
             onPress={Save}

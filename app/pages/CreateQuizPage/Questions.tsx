@@ -1,7 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Pressable, Image } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Pressable,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import RadioInput from "./RadioInput";
 import ImgModal from "./ImgModal";
+import Animated, { FadeInUp } from "react-native-reanimated";
 
 const items = [0, 1, 2, 3];
 
@@ -9,6 +17,7 @@ export default function Questions({
   index,
   questions,
   setQuestions,
+  remove,
 }: questionProp) {
   const [radio, setRadio] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -16,23 +25,40 @@ export default function Questions({
   const array = questions;
   const quest = index;
 
+  function handleDelete() {
+    remove(index);
+  }
+
   return (
-    <View
+    <Animated.View
+      entering={FadeInUp.duration(400)}
       key={index}
       className="bg-[#412E8B] mt-3 h-fit rounded-[5px] mx-auto w-11/12 p-2"
     >
-      <View className="h-8 flex flex-row items-center">
-        <View className="bg-[#F8E607] w-8 h-8 rounded-full flex justify-center items-center">
-          <Text className="text-center font-bold text-2xl text-[#412E8B]">
-            {index + 1}
-          </Text>
+      <View className="h-8 flex flex-row items-center justify-between">
+        <View className="h-8 flex flex-row items-center">
+          <View className="bg-[#F8E607] w-8 h-8 rounded-full flex justify-center items-center">
+            <Text className="text-center font-bold text-2xl text-[#412E8B]">
+              {index + 1}
+            </Text>
+          </View>
+          <Text className="text-white font-bold text-xl ml-2">Questão</Text>
         </View>
-        <Text className="text-white font-bold text-xl ml-2">Questão</Text>
+        {index !== 0 && (
+          <TouchableOpacity onPress={handleDelete}>
+            <View className="bg-red-500 rounded-[5px] items-center justify-center w-8 h-8">
+              <Text className="text-white text-center font-bold text-xl">
+                X
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
       </View>
       <TextInput
         className="bg-white rounded-[5px] mt-2"
         placeholder="Título da Questão"
         onChangeText={(e) => (array[index].title = e)}
+        defaultValue={array[quest].title}
       />
       <Pressable
         onPress={() => setShowModal(true)}
@@ -66,11 +92,12 @@ export default function Questions({
           item={index}
         />
       ))}
-    </View>
+    </Animated.View>
   );
 }
 
 type questionProp = {
+  remove: Function;
   items: Object;
   setQuestions: Function;
   questions: Array<Object>;

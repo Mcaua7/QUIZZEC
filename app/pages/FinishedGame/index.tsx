@@ -3,6 +3,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { router } from "expo-router";
+import Animated, { FadeInUp } from "react-native-reanimated";
 
 export default function FinishedGame({
   pontos,
@@ -10,14 +11,17 @@ export default function FinishedGame({
   length,
 }: FinishedGamesProps) {
   return (
-    <View className="h-full bg-[#412E8B] w-screen flex justify-between">
+    <View className="h-full bg-gray-100 w-screen flex justify-between">
       <View>
-        <Text className="text-white font-semibold text-5xl text-center my-16">
+        <Text className="text-[#412E8B] font-semibold text-5xl text-center my-16">
           CONCLUÍDO
         </Text>
-        <View className="w-11/12 bg-[#A498D1] mx-auto rounded-[5px] justify-between items-center">
+        <Animated.View
+          entering={FadeInUp.duration(500)}
+          className="w-11/12 bg-[#A498D1] mx-auto rounded-[5px] justify-between items-center"
+        >
           <Ionicons name="person-circle" size={140} color="white" />
-          <Text className="text-xl text-[#412E8B] mb-4">{user}</Text>
+          <Text className="text-xl text-white mb-4">{user ?? "Anônimo"}</Text>
           <View className=" w-full  flex flex-row">
             <View className="bg-[#412E8B] rounded-[5px] m-3 flex-1">
               <View className="flex flex-row justify-center items-center">
@@ -43,7 +47,7 @@ export default function FinishedGame({
             </Text>
             <FontAwesome5 name="trophy" size={40} color="#F8E607" />
           </View>
-        </View>
+        </Animated.View>
       </View>
       <TouchableOpacity
         onPress={() => router.push({ pathname: "pages/listQuiz" })}

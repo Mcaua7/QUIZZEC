@@ -13,6 +13,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { router, useLocalSearchParams } from "expo-router";
 import { useFocusEffect } from "expo-router";
+import Animated, { FadeInUp } from "react-native-reanimated";
 
 type QuizData = {
   title: string;
@@ -101,7 +102,7 @@ export default function ListQuiz() {
                   .toUpperCase()
                   .includes(search.toUpperCase()) ||
                   item.title.toUpperCase().includes(search.toUpperCase())) && (
-                  <View key={index}>
+                  <Animated.View entering={FadeInUp.duration(300)} key={index}>
                     <TouchableOpacity
                       onPress={() => {
                         JSON.stringify(item);
@@ -134,24 +135,13 @@ export default function ListQuiz() {
                         </Text>
                       </View>
                     </TouchableOpacity>
-                  </View>
+                  </Animated.View>
                 )
             )}
           </ScrollView>
         )}
         <TouchableOpacity
-          className="absolute
-    bottom-[20px]
-    left-[300px]
-    bg-[#543db3]
-    h-[60px]
-    w-[60px]
-    justify-center
-    items-center
-    rounded-[5px]
-    shadow-2xl
-    shadow-black
-    z-[5px]"
+          className="absolute bottom-[20px] left-[300px] bg-[#543db3] h-[60px] w-[60px] justify-center items-center rounded-[5px] shadow-2xl shadow-black z-[5px]"
           onPress={Route}
         >
           <FontAwesome5 name="plus" size={30} color="white" />

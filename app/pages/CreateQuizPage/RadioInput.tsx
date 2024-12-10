@@ -12,6 +12,7 @@ export default function RadioInput({
   function handleChange(e: string) {
     const array = questions[quest];
     array.answers[item].title = e;
+    console.log(questions[quest].answers[item].title);
   }
 
   function handleSetRadio(item: number) {
@@ -27,12 +28,15 @@ export default function RadioInput({
         onChangeText={handleChange}
         className="bg-white rounded-[5px] flex-1 "
         placeholder="Resposta do Item"
+        defaultValue={questions[quest].answers[item].title}
       />
       <Pressable
         onPress={() => handleSetRadio(item)}
         className={
           "rounded-[5px] m-3 h-5 w-5" +
-          (radio === item ? " bg-green-500" : " bg-gray-500")
+          (questions[quest].answers[4].correctIndex === item
+            ? " bg-green-500"
+            : " bg-gray-500")
         }
       ></Pressable>
     </View>

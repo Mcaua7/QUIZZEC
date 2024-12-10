@@ -1,5 +1,7 @@
 import React from "react";
-import { View, Modal, TextInput, Pressable, Text } from "react-native";
+import { View, Modal, TextInput, TouchableOpacity, Text } from "react-native";
+
+let ImgUrl: string;
 
 export default function QuizImgModal({
   showModal,
@@ -7,8 +9,12 @@ export default function QuizImgModal({
   setImageUrl,
 }: QuizImgProps) {
   function handleChange(e: any) {
+    ImgUrl = e;
+  }
+
+  function handleModal() {
+    setImageUrl(ImgUrl);
     setShowModal(false);
-    setImageUrl(e.nativeEvent.text);
   }
 
   return (
@@ -16,10 +22,19 @@ export default function QuizImgModal({
       <View className="w-full h-full bg-[#00000050]">
         <View className="bg-[#310cc7] rounded-[5px] mx-auto my-auto p-2 w-11/12">
           <TextInput
-            className="full bg-white rounded-[5px]"
+            autoFocus={true}
+            className="full bg-white h-10 rounded-[5px]"
             placeholder="Url Da Imagem"
-            onSubmitEditing={handleChange}
+            onChangeText={handleChange}
           />
+          <TouchableOpacity
+            onPress={handleModal}
+            className="bg-yellow-500 p-3 rounded-[5px] mt-2"
+          >
+            <Text className="text-center text-white font-bold text-xl">
+              Enviar Imagem
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
