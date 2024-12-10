@@ -4,35 +4,30 @@
     "slug": "QUIZZEC",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/QUIZZEC.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "scheme": "QUIZZEC",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#412E8B"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/QUIZZEC.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/QUIZZEC-Logo.png",
+        "backgroundColor": "#412E8B"
       },
-      "permissions": [
-        "android.permission.CAMERA"
-      ],
+      "permissions": ["android.permission.CAMERA"],
       "package": "com.renan_soares_souza.QUIZZEC"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-barcode-scanner"
-    ],
+    "plugins": ["expo-router", "expo-barcode-scanner"],
     "extra": {
       "router": {
         "origin": false
