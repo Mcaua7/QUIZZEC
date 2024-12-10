@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import FinishedGame from "../FinishedGame";
 import Animated, { FadeIn } from "react-native-reanimated";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function QuizGame() {
   const params = useLocalSearchParams();
@@ -55,10 +56,15 @@ export default function QuizGame() {
               </Text>
             </View>
             {quizGame[question - 1].questImgUrl !== "" && (
-              <Image
-                className="w-full h-60 my-2 rounded-[5px] bg-blue-500"
-                source={{ uri: quizGame[question - 1].questImgUrl }}
-              />
+              <View className="flex justify-center items-center">
+                <Image
+                  className="w-full h-60 my-2 z-50 rounded-[5px] bg-[#c3c4c700]"
+                  source={{ uri: quizGame[question - 1].questImgUrl }}
+                />
+                <View className="absolute bg-[#c3c4c7] flex justify-center items-center w-full h-60 rounded-[5px] my-2 text-white text-2xl text-center">
+                  <MaterialIcons name="broken-image" size={80} color="gray" />
+                </View>
+              </View>
             )}
             {quizGame[question - 1].answers.map(
               (item: object, index: number) =>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Image, Pressable } from "react-native";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import QuizImgModal from "./QuizImgModal";
 
 export default function ImageEdit({ setImageUrl, imageUrl }: ImageEditProps) {
@@ -20,7 +20,7 @@ export default function ImageEdit({ setImageUrl, imageUrl }: ImageEditProps) {
         onPress={() => setShowModal(true)}
         className="flex justify-center items-center bg-[#004BE0] h-[70px] absolute right-5 -bottom-9 rounded-[5px] shadow-md w-[70px]"
       >
-        <MaterialIcons name="mode-edit" size={45} color="white" />
+        <MaterialCommunityIcons name="image-edit" size={45} color="white" />
       </Pressable>
       <QuizImgModal
         setImageUrl={setImageUrl}

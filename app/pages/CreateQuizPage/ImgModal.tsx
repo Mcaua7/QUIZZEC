@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+let array: object;
 export default function ImgModal({
   showModal,
   setShowModal,
@@ -17,17 +18,21 @@ export default function ImgModal({
 }: ImgModalprops) {
   function handleModal() {
     setShowModal(false);
-    console.log(questions[index]);
-  }
-
-  function handleChange(e: string) {
-    const array = questions;
-    array[index].questImgUrl = e;
     setQuestions(array);
   }
 
+  function handleChange(e: string) {
+    array = questions;
+    array[index].questImgUrl = e;
+  }
+
   return (
-    <Modal visible={showModal} transparent animationType="fade">
+    <Modal
+      visible={showModal}
+      transparent
+      animationType="fade"
+      onRequestClose={() => setShowModal(false)}
+    >
       <View className="w-full h-full bg-[#00000050]">
         <View className="bg-[#412E8B] rounded-[5px] mx-auto my-auto p-2 w-11/12">
           <TextInput

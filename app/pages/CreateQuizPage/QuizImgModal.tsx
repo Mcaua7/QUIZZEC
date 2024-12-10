@@ -18,7 +18,12 @@ export default function QuizImgModal({
   }
 
   return (
-    <Modal visible={showModal} transparent animationType="fade">
+    <Modal
+      visible={showModal}
+      transparent
+      animationType="fade"
+      onRequestClose={() => setShowModal(false)}
+    >
       <View className="w-full h-full bg-[#00000050]">
         <View className="bg-[#310cc7] rounded-[5px] mx-auto my-auto p-2 w-11/12">
           <TextInput

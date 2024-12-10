@@ -10,6 +10,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function QuizPage() {
   const [quizInfo, setQuizInfo] = useState([]);
@@ -52,10 +53,15 @@ export default function QuizPage() {
             </View>
             <View>
               {quizInfo.imageUrl ? (
-                <Image
-                  className="w-full border-[1px] h-[200px] mb-[10px] bg-[#d8d8d8]"
-                  source={{ uri: quizInfo.imageUrl }}
-                ></Image>
+                <View>
+                  <Image
+                    className="w-full border-[1px] z-50 h-[200px] mb-[10px] bg-[#ffffff00]"
+                    source={{ uri: quizInfo.imageUrl }}
+                  ></Image>
+                  <View className="absolute w-full h-[200px] justify-center items-center bg-[#c3c4c7]">
+                    <MaterialIcons name="broken-image" size={70} color="gray" />
+                  </View>
+                </View>
               ) : (
                 <View className="w-full border-[1px] border-[#929292] h-[200px] mb-[10px] justify-center items-center bg-[#323f61]">
                   <Image

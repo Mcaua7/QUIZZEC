@@ -1,9 +1,10 @@
-import { View, Text, Button, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ActivityIndicator } from "react-native";
 import React, { useState, useEffect } from "react";
-import { Redirect, router } from "expo-router";
+import { router } from "expo-router";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { CameraView, useCameraPermissions } from "expo-camera";
+import Toast from "react-native-toast-message";
 
 export default function QrCodeReader() {
   const [permission, requestPermission] = useCameraPermissions();
@@ -76,27 +77,48 @@ export default function QrCodeReader() {
   };
 
   return (
-    <View className="flex-1 pt-[80px] items-center bg-[#412E8B]">
-      <TouchableOpacity
-        className="absolute top-[10px] right-[340px] bg-[#412E8B] justify-center items-center rounded-[5px]"
-        onPress={() => {
-          router.back();
-        }}
-      >
-        <FontAwesome5 name="arrow-left" size={40} color="white" />
-      </TouchableOpacity>
+    <View className="h-full w-screen">
+      {user == "" ? (
+        <View className="flex-1 pt-[80px] items-center bg-[#412E8B]">
+          <TouchableOpacity
+            className="absolute top-[10px] right-[340px] bg-[#412E8B] justify-center items-center rounded-[5px]"
+            onPress={() => {
+              router.back();
+            }}
+          >
+            <FontAwesome5 name="arrow-left" size={40} color="white" />
+          </TouchableOpacity>
 
-      <CameraView
-        className="h-[80%] w-[90%] rounded-[10px] justify-center pl-[50px] bg-[#e4e4e4] mb-[50px] mt-[10px]"
-        facing="back"
-        onBarcodeScanned={({ data }) => {
-          const params = JSON.parse(data);
-          setUSer(params.user);
-          getData(params.index);
-        }}
-      >
-        <MaterialCommunityIcons name="scan-helper" size={250} color="white" />
-      </CameraView>
+          <CameraView
+            className="h-[80%] w-[90%] rounded-[10px] justify-center pl-[50px] bg-[#e4e4e4] mb-[50px] mt-[10px]"
+            facing="back"
+            onBarcodeScanned={({ data }) => {
+              try {
+                const params = JSON.parse(data);
+                setUSer(params.user);
+                getData(params.index);
+              } catch {
+                Toast.show({
+                  type: "error",
+                  text1: "Erro ao Escanear QRCODE",
+                  text2: "QRCODE Inválido",
+                });
+              }
+            }}
+          >
+            <MaterialCommunityIcons
+              name="scan-helper"
+              size={250}
+              color="white"
+            />
+          </CameraView>
+        </View>
+      ) : (
+        <View className="h-full w-screen justify-center items-center">
+          <ActivityIndicator size={"large"} color="#412E8B" />
+        </View>
+      )}
+      <Toast />
     </View>
   );
 }

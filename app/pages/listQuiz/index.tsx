@@ -14,6 +14,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { router, useLocalSearchParams } from "expo-router";
 import { useFocusEffect } from "expo-router";
 import Animated, { FadeInUp } from "react-native-reanimated";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 type QuizData = {
   title: string;
@@ -79,11 +80,12 @@ export default function ListQuiz() {
         <View className="w-3/5 h-10 flex flex-row items-center bg-white rounded-[5px]">
           <TextInput
             onChangeText={(e) => setSearch(e)}
-            className="w-[87%] bg-white rounded-[5px]"
+            className="w-[86%] bg-white rounded-[5px]"
           />
           <FontAwesome name="search" size={20} color="black" />
         </View>
         <TouchableOpacity
+          className="h-[50px] w-[50px]"
           onPress={() => {
             router.push({ pathname: "pages/qrCodeReader" });
           }}
@@ -114,11 +116,20 @@ export default function ListQuiz() {
                       }}
                     >
                       <View className="m-[10px] border-[1px] bg-[#412E8B] items-start p-[10px]">
-                        {item.imageUrl ? (
-                          <Image
-                            className="w-full border-[1px] h-[200px] mb-[10px] bg-[#d8d8d8]"
-                            source={{ uri: item.imageUrl }}
-                          ></Image>
+                        {item.imageUrl && item.imageUrl !== "" ? (
+                          <View className="w-full">
+                            <Image
+                              className="w-full border-[1px] z-50 h-[200px] mb-[10px] bg-[#d8d8d800]"
+                              source={{ uri: item.imageUrl }}
+                            ></Image>
+                            <View className="absolute w-full h-[200px] justify-center items-center bg-[#c3c4c7]">
+                              <MaterialIcons
+                                name="broken-image"
+                                size={70}
+                                color="gray"
+                              />
+                            </View>
+                          </View>
                         ) : (
                           <View className="w-full border-[1px] border-[#929292] h-[200px] mb-[10px] justify-center items-center bg-[#323f61]">
                             <Image
@@ -141,7 +152,7 @@ export default function ListQuiz() {
           </ScrollView>
         )}
         <TouchableOpacity
-          className="absolute bottom-[20px] left-[300px] bg-[#543db3] h-[60px] w-[60px] justify-center items-center rounded-[5px] shadow-2xl shadow-black z-[5px]"
+          className="absolute bottom-[20px] left-[300px] bg-[#9e86ff] h-[60px] w-[60px] justify-center items-center rounded-[5px] shadow-2xl shadow-black z-[5px]"
           onPress={Route}
         >
           <FontAwesome5 name="plus" size={30} color="white" />

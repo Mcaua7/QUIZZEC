@@ -68,6 +68,7 @@ export default function Questions({
           <Text className="text-white">Adicione Uma Imagem a sua Questão</Text>
         ) : (
           <Image
+            defaultSource={{ uri: questions[index]?.questImgUrl }}
             className="h-full w-full rounded-[5px]"
             source={{ uri: questions[index]?.questImgUrl }}
           />
