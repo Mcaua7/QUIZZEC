@@ -62,24 +62,23 @@ export default function ListQuiz() {
 
   return (
     <View className="flex-1">
-      <View className="flex-row bg-[#412E8B] justify-between p-[20px] h-[80px]">
+      <View className="flex-row bg-[#412E8B] justify-between p-[20px] ">
         <TouchableOpacity
-          className="h-[50px] w-[50px]"
           onPress={() => {
             router.push({ pathname: "pages/Profile" });
           }}
         >
           <FontAwesome name="user-circle-o" size={40} color="white" />
         </TouchableOpacity>
-        <View className="w-3/5 h-10 flex flex-row items-center bg-white rounded-[5px]">
+        <View className="w-3/5 h-full flex flex-row items-center bg-white rounded-[5px]">
           <TextInput
+            placeholder="Pesquisar"
             onChangeText={(e) => setSearch(e)}
-            className="w-[86%] bg-white rounded-[5px]"
+            className="w-[86%] px-2 bg-white rounded-[5px]"
           />
           <FontAwesome name="search" size={20} color="black" />
         </View>
         <TouchableOpacity
-          className="h-[50px] w-[50px]"
           onPress={() => {
             router.push({ pathname: "pages/qrCodeReader" });
           }}

@@ -9,13 +9,20 @@ export default function ImageEdit({ setImageUrl, imageUrl }: ImageEditProps) {
 
   return (
     <View className="bg-gray-500 h-60">
-      {imageUrl && (
+      {imageUrl ? (
         <Image
           className="h-full"
           source={{
             uri: imageUrl,
           }}
         />
+      ) : (
+        <View className="w-full h-full border-[#929292] mb-[10px] justify-center items-center bg-[#323f61]">
+          <Image
+            className="h-28 w-28"
+            source={require("../../../assets/QUIZZEC-whihout-bg.png")}
+          />
+        </View>
       )}
       <Pressable
         onPress={() => setShowModal(true)}
