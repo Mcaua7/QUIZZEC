@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import ListQuiz from "c:/Users/Iris Lab/Documents/QUIZZEC/app/pages/listQuiz/index";
+import ListQuiz from "../app/pages/listQuiz";
 
 export default function Page() {
   return (
