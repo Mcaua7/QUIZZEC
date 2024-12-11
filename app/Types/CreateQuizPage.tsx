@@ -48,6 +48,7 @@ export type questionProp = {
 };
 
 export type QuizImgProps = {
+  imageUrl: string;
   setImageUrl: Function;
   showModal: boolean;
   setShowModal: Function;

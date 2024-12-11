@@ -33,6 +33,7 @@ export default function ImgModal({
             className="full bg-white h-10 rounded-[5px]"
             placeholder="Url Da Imagem"
             onChangeText={handleChange}
+            defaultValue={questions[index].questImgUrl}
           />
           <TouchableOpacity
             onPress={handleModal}

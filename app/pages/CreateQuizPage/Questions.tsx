@@ -11,6 +11,7 @@ import RadioInput from "./RadioInput";
 import ImgModal from "./ImgModal";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import { Range_0_3_arr, questionProp } from "../../Types/CreateQuizPage";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const items: Range_0_3_arr = [0, 1, 2, 3];
 
@@ -68,11 +69,16 @@ export default function Questions({
         {questions[index]?.questImgUrl === "" ? (
           <Text className="text-white">Adicione Uma Imagem a sua Questão</Text>
         ) : (
-          <Image
-            defaultSource={{ uri: questions[index]?.questImgUrl }}
-            className="h-full w-full rounded-[5px]"
-            source={{ uri: questions[index]?.questImgUrl }}
-          />
+          <View className="w-full h-full">
+            <Image
+              defaultSource={{ uri: questions[index]?.questImgUrl }}
+              className="h-full w-full z-50 rounded-[5px]"
+              source={{ uri: questions[index]?.questImgUrl }}
+            />
+            <View className="absolute w-full rounded-[5px] h-full justify-center items-center bg-[#c3c4c7]">
+              <MaterialIcons name="broken-image" size={70} color="gray" />
+            </View>
+          </View>
         )}
       </Pressable>
       <ImgModal

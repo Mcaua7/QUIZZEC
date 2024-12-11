@@ -8,6 +8,7 @@ export default function QuizImgModal({
   showModal,
   setShowModal,
   setImageUrl,
+  imageUrl,
 }: QuizImgProps) {
   function handleChange(e: any) {
     ImgUrl = e;
@@ -32,6 +33,7 @@ export default function QuizImgModal({
             className="full bg-white h-10 rounded-[5px]"
             placeholder="Url Da Imagem"
             onChangeText={handleChange}
+            defaultValue={imageUrl}
           />
           <TouchableOpacity
             onPress={handleModal}
