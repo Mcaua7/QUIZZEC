@@ -2,7 +2,7 @@
   "expo": {
     "name": "QUIZZEC",
     "slug": "QUIZZEC",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/QUIZZEC.png",
     "userInterfaceStyle": "light",
@@ -21,13 +21,18 @@
         "foregroundImage": "./assets/QUIZZEC-Logo.png",
         "backgroundColor": "#412E8B"
       },
-      "permissions": ["android.permission.CAMERA"],
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
       "package": "com.renan_soares_souza.QUIZZEC"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router", "expo-barcode-scanner"],
+    "plugins": [
+      "expo-router",
+      "expo-barcode-scanner"
+    ],
     "extra": {
       "router": {
         "origin": false
