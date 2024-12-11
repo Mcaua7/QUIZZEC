@@ -6,14 +6,14 @@ export default function QuizInfo({ setTitle, setDescription }: QuizInfoProps) {
     <View className="bg-[#412E8B] mx-auto mt-12 rounded-[5px] w-11/12 h-fit p-2 ">
       <TextInput
         onChangeText={(e: string) => setTitle(e)}
-        className="bg-white rounded-[5px] "
+        className="bg-white rounded-[5px] p-3 "
         placeholder="Título"
       />
       <TextInput
         onChangeText={(e: string) => setDescription(e)}
         multiline={true}
         numberOfLines={4}
-        className="bg-white rounded-[5px] mt-3 h-24 justify-start items-start"
+        className="bg-white rounded-[5px] mt-3 h-24 p-3 justify-start items-start"
         placeholder="Descrição"
       />
     </View>

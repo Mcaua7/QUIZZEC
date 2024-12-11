@@ -11,7 +11,7 @@ import RadioInput from "./RadioInput";
 import ImgModal from "./ImgModal";
 import Animated, { FadeInUp } from "react-native-reanimated";
 
-const items = [0, 1, 2, 3];
+const items: Range_0_3_arr = [0, 1, 2, 3];
 
 export default function Questions({
   index,
@@ -55,7 +55,7 @@ export default function Questions({
         )}
       </View>
       <TextInput
-        className="bg-white rounded-[5px] mt-2"
+        className="bg-white rounded-[5px] mt-2 p-3"
         placeholder="Título da Questão"
         onChangeText={(e) => (array[index].title = e)}
         defaultValue={array[quest].title}
@@ -64,7 +64,7 @@ export default function Questions({
         onPress={() => setShowModal(true)}
         className="bg-gray-500 h-52 rounded-[5px] flex justify-center mt-2 w-full mx-auto items-center"
       >
-        {questions[index]?.questImgUrl == "" ? (
+        {questions[index]?.questImgUrl === "" ? (
           <Text className="text-white">Adicione Uma Imagem a sua Questão</Text>
         ) : (
           <Image
@@ -82,7 +82,7 @@ export default function Questions({
         showModal={showModal}
       />
 
-      {items.map((items, index) => (
+      {items.map((items, index: number) => (
         <RadioInput
           radio={radio}
           setRadio={setRadio}
@@ -90,17 +90,33 @@ export default function Questions({
           questions={questions}
           key={index}
           quest={quest}
-          item={index}
+          item={items}
         />
       ))}
     </Animated.View>
   );
 }
 
+type Range_0_3 = 0 | 1 | 2 | 3;
+
+type Range_0_3_arr = Range_0_3[];
+
 type questionProp = {
   remove: Function;
-  items: Object;
+  items: object;
   setQuestions: Function;
-  questions: Array<Object>;
+  questions: [
+    {
+      title: string;
+      questImgUrl: string;
+      answers: [
+        { title: string },
+        { title: string },
+        { title: string },
+        { title: string },
+        { correctIndex: number },
+      ];
+    },
+  ];
   index: number;
 };

@@ -1,10 +1,4 @@
-import {
-  View,
-  Pressable,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import ImageEdit from "./ImageEdit";
 import QuizInfo from "./QuizInfo";
@@ -12,9 +6,54 @@ import Questions from "./Questions";
 import Toast from "react-native-toast-message";
 import { router, useLocalSearchParams } from "expo-router";
 
+const EMPTYDATA: data = [
+  {
+    user: "",
+    title: "",
+    description: "",
+    imageUrl: "",
+    quizData: [
+      {
+        title: "",
+        questImgUrl: "",
+        answers: [
+          { title: "" },
+          { title: "" },
+          { title: "" },
+          { title: "" },
+          { correctIndex: 0 },
+        ],
+      },
+    ],
+  },
+];
+
+type data = [
+  {
+    user: string | string[];
+    title: string;
+    description: string;
+    imageUrl: string;
+    quizData: questions;
+  },
+];
+type questions = [
+  {
+    title: string;
+    questImgUrl: string;
+    answers: [
+      { title: string },
+      { title: string },
+      { title: string },
+      { title: string },
+      { correctIndex: number },
+    ];
+  },
+];
+
 export default function CreateQuizPage() {
   const [isDisable, setIsDisable] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<data>(EMPTYDATA);
   const params = useLocalSearchParams();
   const user = params.user;
   console.log(user);
@@ -23,7 +62,7 @@ export default function CreateQuizPage() {
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  const [questions, setQuestions] = useState([
+  const [questions, setQuestions] = useState<questions>([
     {
       title: "",
       questImgUrl: "",
@@ -39,7 +78,7 @@ export default function CreateQuizPage() {
   const [length, setLength] = useState(1);
 
   function fecthApi(data: object) {
-    let array: Array<Object>;
+    let array: object[];
 
     fetch("https://api.jsonbin.io/v3/b/674f426ae41b4d34e45f34e2", {
       method: "GET",
@@ -79,7 +118,7 @@ export default function CreateQuizPage() {
     console.log(array);
     let erro = [];
     let erroGeral = false;
-    if (array[0].description == "" || array[0].title == "") {
+    if (array[0].description === "" || array[0].title === "") {
       erroGeral = true;
       Toast.show({
         type: "error",
@@ -88,16 +127,16 @@ export default function CreateQuizPage() {
       });
     }
     for (let i = 0; i < array[0].quizData.length; i++) {
-      if (array[0].quizData[i].title == "") {
+      if (array[0].quizData[i].title === "") {
         erro.push(i + 1);
         erroGeral = true;
         console.log(erro);
       }
       if (
-        array[0].quizData[i].answers[0].title == "" ||
-        array[0].quizData[i].answers[1].title == "" ||
-        array[0].quizData[i].answers[2].title == "" ||
-        array[0].quizData[i].answers[3].title == ""
+        array[0].quizData[i].answers[0].title === "" ||
+        array[0].quizData[i].answers[1].title === "" ||
+        array[0].quizData[i].answers[2].title === "" ||
+        array[0].quizData[i].answers[3].title === ""
       ) {
         erro.push(i + 1);
         erroGeral = true;
@@ -143,7 +182,7 @@ export default function CreateQuizPage() {
       ],
     });
     setQuestions(array);
-    setLength((prevLength) => prevLength + 1);
+    setLength(() => length + 1);
   }
   function handleRemoveQuestion(index: number) {
     const array = questions;
@@ -196,7 +235,7 @@ export default function CreateQuizPage() {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setData([]);
+              setData(EMPTYDATA);
               Reset();
             }}
             className="border-[#412E8B] border-2 p-5 w-11/12 mx-auto my-3 rounded-[5px]"
