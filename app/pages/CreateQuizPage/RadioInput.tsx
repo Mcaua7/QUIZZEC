@@ -1,14 +1,13 @@
 import React from "react";
 import { View, TextInput, Pressable } from "react-native";
+import { RadioInputProps } from "../../Types/CreateQuizPage";
 
 export default function RadioInput({
   item,
-  setQuestions,
   setRadio,
   questions,
   quest,
-  radio,
-}: radioInputProps) {
+}: RadioInputProps) {
   function handleChange(e: string) {
     const array = questions[quest];
     array.answers[item].title = e;
@@ -26,7 +25,7 @@ export default function RadioInput({
     <View className="bg-white w-full flex rounded-[5px] mt-2 flex-row justify-between items-center ">
       <TextInput
         onChangeText={handleChange}
-        className="bg-white rounded-[5px] flex-1 p-3 "
+        className="bg-white rounded-[5px] flex-1 p-3 h-12"
         placeholder="Resposta do Item"
         defaultValue={questions[quest].answers[item].title}
       />
@@ -42,25 +41,3 @@ export default function RadioInput({
     </View>
   );
 }
-type Range_0_3 = 0 | 1 | 2 | 3;
-
-type radioInputProps = {
-  radio: number;
-  item: Range_0_3;
-  setQuestions: Function;
-  setRadio: Function;
-  questions: [
-    {
-      title: string;
-      questImgUrl: string;
-      answers: [
-        { title: string },
-        { title: string },
-        { title: string },
-        { title: string },
-        { correctIndex: number },
-      ];
-    },
-  ];
-  quest: number;
-};

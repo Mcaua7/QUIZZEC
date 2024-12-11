@@ -4,6 +4,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { router } from "expo-router";
 import Animated, { FadeInUp } from "react-native-reanimated";
+import { FinishedGamesProps } from "../../Types/FinishedGame";
 
 export default function FinishedGame({
   pontos,
@@ -59,9 +60,3 @@ export default function FinishedGame({
     </View>
   );
 }
-
-type FinishedGamesProps = {
-  pontos: number;
-  user: string;
-  length: number;
-};

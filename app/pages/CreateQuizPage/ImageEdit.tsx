@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Image, Pressable } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import QuizImgModal from "./QuizImgModal";
+import { ImageEditProps } from "../../Types/CreateQuizPage";
 
 export default function ImageEdit({ setImageUrl, imageUrl }: ImageEditProps) {
   const [showModal, setShowModal] = useState(false);
@@ -30,8 +31,3 @@ export default function ImageEdit({ setImageUrl, imageUrl }: ImageEditProps) {
     </View>
   );
 }
-
-type ImageEditProps = {
-  setImageUrl: Function;
-  imageUrl: string;
-};

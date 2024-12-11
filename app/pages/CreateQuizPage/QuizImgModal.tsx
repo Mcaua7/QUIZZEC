@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Modal, TextInput, TouchableOpacity, Text } from "react-native";
+import { QuizImgProps } from "../../Types/CreateQuizPage";
 
 let ImgUrl: string;
 
@@ -45,9 +46,3 @@ export default function QuizImgModal({
     </Modal>
   );
 }
-
-type QuizImgProps = {
-  setImageUrl: Function;
-  showModal: boolean;
-  setShowModal: Function;
-};

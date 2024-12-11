@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  ScrollView,
   View,
   Text,
   TouchableOpacity,
@@ -11,11 +12,31 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { data, param } from "../../Types/QuizPage";
 
 export default function QuizPage() {
-  const [quizInfo, setQuizInfo] = useState([]);
-  const params = useLocalSearchParams();
-  const index = params.index;
+  const [quizInfo, setQuizInfo] = useState<data>({
+    user: "",
+    title: "",
+    description: "",
+    imageUrl: "",
+    quizData: [
+      {
+        title: "",
+        questImgUrl: "",
+        answers: [
+          { title: "" },
+          { title: "" },
+          { title: "" },
+          { title: "" },
+          { correctIndex: 0 },
+        ],
+      },
+    ],
+  });
+
+  const params = useLocalSearchParams<param>();
+  const index = parseInt(params.index);
   const user = params.user;
 
   useEffect(() => {
@@ -28,7 +49,7 @@ export default function QuizPage() {
     })
       .then((resp) => resp.json())
       .then((val) => setQuizInfo(val.record[index]));
-  }, []);
+  }, [index]);
   function GoBack() {
     router.back();
   }
@@ -41,7 +62,7 @@ export default function QuizPage() {
   }
   return (
     <View className="h-full w-screen flex justify-center items">
-      {quizInfo.length == 0 ? (
+      {quizInfo.title === "" ? (
         <ActivityIndicator size="large" color="#412E8B" />
       ) : (
         <View className="h-full w-screen flex flex-col justify-between">
@@ -51,33 +72,38 @@ export default function QuizPage() {
                 <FontAwesome5 name="arrow-left" size={40} color="#412E8B" />
               </TouchableOpacity>
             </View>
-            <View>
-              {quizInfo.imageUrl ? (
-                <View>
-                  <Image
-                    className="w-full border-[1px] z-50 h-[200px] mb-[10px] bg-[#ffffff00]"
-                    source={{ uri: quizInfo.imageUrl }}
-                  ></Image>
-                  <View className="absolute w-full h-[200px] justify-center items-center bg-[#c3c4c7]">
-                    <MaterialIcons name="broken-image" size={70} color="gray" />
+            <ScrollView className="h-[66%]">
+              <View>
+                {quizInfo.imageUrl ? (
+                  <View>
+                    <Image
+                      className="w-full border-[1px] z-50 h-[200px] mb-[10px] bg-[#ffffff00]"
+                      source={{ uri: quizInfo.imageUrl }}
+                    ></Image>
+                    <View className="absolute w-full h-[200px] justify-center items-center bg-[#c3c4c7]">
+                      <MaterialIcons
+                        name="broken-image"
+                        size={70}
+                        color="gray"
+                      />
+                    </View>
                   </View>
-                </View>
-              ) : (
-                <View className="w-full border-[1px] border-[#929292] h-[200px] mb-[10px] justify-center items-center bg-[#323f61]">
-                  <Image
-                    className="h-28 w-28"
-                    source={require("../../../assets/QUIZZEC-whihout-bg.png")}
-                  />
-                </View>
-              )}
-              <Text className="text-4xl mx-4 my-2 text-[#412E8B] font-bold">
-                {quizInfo?.title}
-              </Text>
-              <Text className="text-xl mx-4  text-[#412E8B]">
-                {quizInfo?.description}
-                {console.log(quizInfo?.user)}
-              </Text>
-            </View>
+                ) : (
+                  <View className="w-full border-[1px] border-[#929292] h-[200px] mb-[10px] justify-center items-center bg-[#323f61]">
+                    <Image
+                      className="h-28 w-28"
+                      source={require("../../../assets/QUIZZEC-whihout-bg.png")}
+                    />
+                  </View>
+                )}
+                <Text className="text-4xl mx-4 my-2 text-[#412E8B] font-bold">
+                  {quizInfo?.title}
+                </Text>
+                <Text className="text-xl mx-4  text-[#412E8B]">
+                  {quizInfo?.description}
+                </Text>
+              </View>
+            </ScrollView>
           </View>
           <View>
             <Text className="mx-5 mt-8 text-[#412E8B]">Criado por:</Text>
@@ -85,16 +111,16 @@ export default function QuizPage() {
               <View className="flex flex-row items-center">
                 <Ionicons name="person-circle" size={40} color="#412E8B" />
                 <Text className="text-lg mx-4 font-semibold  text-[#412E8B]">
-                  {quizInfo?.user == undefined ? "Anônimo" : quizInfo?.user}
+                  {quizInfo?.user === undefined ? "Anônimo" : quizInfo?.user}
                 </Text>
               </View>
               <TouchableOpacity
-                onPress={() =>
+                onPress={() => {
                   router.push({
                     pathname: "pages/QrCodeGenerator",
-                    params: { quizInfo, user, index },
-                  })
-                }
+                    params: { user, index },
+                  });
+                }}
               >
                 <Entypo name="share" size={35} color="#412E8B" />
               </TouchableOpacity>

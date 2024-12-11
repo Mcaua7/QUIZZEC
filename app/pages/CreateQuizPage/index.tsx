@@ -5,6 +5,7 @@ import QuizInfo from "./QuizInfo";
 import Questions from "./Questions";
 import Toast from "react-native-toast-message";
 import { router, useLocalSearchParams } from "expo-router";
+import { data, questions } from "../../Types/CreateQuizPage";
 
 const EMPTYDATA: data = [
   {
@@ -25,29 +26,6 @@ const EMPTYDATA: data = [
         ],
       },
     ],
-  },
-];
-
-type data = [
-  {
-    user: string | string[];
-    title: string;
-    description: string;
-    imageUrl: string;
-    quizData: questions;
-  },
-];
-type questions = [
-  {
-    title: string;
-    questImgUrl: string;
-    answers: [
-      { title: string },
-      { title: string },
-      { title: string },
-      { title: string },
-      { correctIndex: number },
-    ];
   },
 ];
 

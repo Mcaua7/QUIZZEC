@@ -10,6 +10,7 @@ import {
 import RadioInput from "./RadioInput";
 import ImgModal from "./ImgModal";
 import Animated, { FadeInUp } from "react-native-reanimated";
+import { Range_0_3_arr, questionProp } from "../../Types/CreateQuizPage";
 
 const items: Range_0_3_arr = [0, 1, 2, 3];
 
@@ -19,7 +20,7 @@ export default function Questions({
   setQuestions,
   remove,
 }: questionProp) {
-  const [radio, setRadio] = useState(0);
+  const [, setRadio] = useState(0);
   const [showModal, setShowModal] = useState(false);
 
   const array = questions;
@@ -55,7 +56,7 @@ export default function Questions({
         )}
       </View>
       <TextInput
-        className="bg-white rounded-[5px] mt-2 p-3"
+        className="bg-white rounded-[5px] mt-2 p-3 h-12"
         placeholder="Título da Questão"
         onChangeText={(e) => (array[index].title = e)}
         defaultValue={array[quest].title}
@@ -84,9 +85,7 @@ export default function Questions({
 
       {items.map((items, index: number) => (
         <RadioInput
-          radio={radio}
           setRadio={setRadio}
-          setQuestions={setQuestions}
           questions={questions}
           key={index}
           quest={quest}
@@ -96,27 +95,3 @@ export default function Questions({
     </Animated.View>
   );
 }
-
-type Range_0_3 = 0 | 1 | 2 | 3;
-
-type Range_0_3_arr = Range_0_3[];
-
-type questionProp = {
-  remove: Function;
-  items: object;
-  setQuestions: Function;
-  questions: [
-    {
-      title: string;
-      questImgUrl: string;
-      answers: [
-        { title: string },
-        { title: string },
-        { title: string },
-        { title: string },
-        { correctIndex: number },
-      ];
-    },
-  ];
-  index: number;
-};

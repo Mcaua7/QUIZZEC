@@ -4,27 +4,29 @@ import { useLocalSearchParams } from "expo-router";
 import FinishedGame from "../FinishedGame";
 import Animated, { FadeIn } from "react-native-reanimated";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { ParamQuizGame, Button, ItemsQuestion } from "../../Types/QuizGame";
 
 export default function QuizGame() {
-  const params = useLocalSearchParams();
+  const params = useLocalSearchParams<ParamQuizGame>();
   const quizInfo = params.string;
   const user = params.user;
   const obj = JSON.parse(quizInfo);
-  const [quizGame, setQuizGame] = useState(obj.quizData);
+  const [quizGame] = useState(obj.quizData);
   const [question, setQuestion] = useState(1);
-  const [clikedButton, setClikedButton] = useState({
+  const [clikedButton, setClikedButton] = useState<Button>({
     disable: false,
     index: null,
   });
   const [pontos, setPontos] = useState(0);
 
   const correct = quizGame[question - 1]?.answers[4].correctIndex;
+
   function handleSend(index: number) {
     setClikedButton({
       disable: true,
       index: index,
     });
-    if (correct == index) {
+    if (correct === index) {
       setPontos((prev) => prev + 5);
     }
     setTimeout(() => {
@@ -67,7 +69,7 @@ export default function QuizGame() {
               </View>
             )}
             {quizGame[question - 1].answers.map(
-              (item: object, index: number) =>
+              (item: ItemsQuestion, index: number) =>
                 item.title && (
                   <View key={index}>
                     <TouchableOpacity
@@ -76,10 +78,10 @@ export default function QuizGame() {
                       key={index}
                       className={
                         " rounded-[5px] my-1 p-6 " +
-                        (clikedButton.disable == true
-                          ? index == correct
+                        (clikedButton.disable === true
+                          ? index === correct
                             ? "bg-green-500"
-                            : clikedButton.index == index &&
+                            : clikedButton.index === index &&
                               clikedButton.index !== correct &&
                               "bg-red-500"
                           : "bg-[#412E8B]")

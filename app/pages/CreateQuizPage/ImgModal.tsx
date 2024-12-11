@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  View,
-  Modal,
-  TextInput,
-  Pressable,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { View, Modal, TextInput, Text, TouchableOpacity } from "react-native";
+import { questions, ImgModalprops } from "../../Types/CreateQuizPage";
 
-let array: object;
+let array: questions;
 export default function ImgModal({
   showModal,
   setShowModal,
@@ -53,11 +47,3 @@ export default function ImgModal({
     </Modal>
   );
 }
-
-type ImgModalprops = {
-  showModal: boolean;
-  setShowModal: Function;
-  index: number;
-  questions: Array<Object>;
-  setQuestions: Function;
-};

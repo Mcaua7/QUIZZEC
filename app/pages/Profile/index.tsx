@@ -29,7 +29,7 @@ export default function Profile() {
       </View>
       <Ionicons name="person-circle" size={180} color="white" />
       <TouchableOpacity onPress={() => setIsChanging(true)}>
-        {isChanging == true ? (
+        {isChanging === true ? (
           <TextInput
             className="bg-white w-72 p-4 rounded-[5px]"
             onSubmitEditing={handleSet}
@@ -38,7 +38,7 @@ export default function Profile() {
         ) : (
           <View className="border-[1px] rounded-[5px] border-white w-8/12 flex">
             <Text className="text-center text-white font-bold text-xl p-3">
-              {user == "" ? "Anônimo" : user}
+              {user === "" ? "Anônimo" : user}
             </Text>
           </View>
         )}

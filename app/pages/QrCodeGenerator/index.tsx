@@ -6,12 +6,12 @@ import QRCode from "react-native-qrcode-svg";
 export default function QroCodeGenerator() {
   const params = useLocalSearchParams();
   let logo = require("../../../assets/QUIZZEC.png");
-  const index = params.index
-  const user = params?.user == undefined ? "Anônimo" : params?.user
-  console.log(user)
-  const data = {user, index}
-  const QrCode = JSON.stringify(data)
-  console.log('data', QrCode)
+  const index = params.index;
+  const user = params?.user === undefined ? "Anônimo" : params?.user;
+  console.log(user);
+  const data = { user, index };
+  const QrCode = JSON.stringify(data);
+  console.log("data", QrCode);
 
   function GoBack() {
     router.back();
@@ -26,7 +26,7 @@ export default function QroCodeGenerator() {
       </View>
       <View className="w-11/12 h-80 mx-auto my-16">
         {/* <View className="w-full bg-gray-500 h-full  "></View> */}
-        <QRCode value={QrCode} logo={logo} size={350}/>
+        <QRCode value={QrCode} logo={logo} size={350} />
         <Text className="text-white text-lg m-2">
           Compartilhe o QRCODE para seus amigos para que eles possam acessar o
           Quiz também

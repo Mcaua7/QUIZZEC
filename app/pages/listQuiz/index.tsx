@@ -15,13 +15,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { useFocusEffect } from "expo-router";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-
-type QuizData = {
-  title: string;
-  description: string;
-  imageUrl: string;
-  quizData: any[];
-};
+import { QuizData } from "../../Types/listQuiz";
 
 export default function ListQuiz() {
   const [search, setSearch] = useState("");
@@ -139,10 +133,14 @@ export default function ListQuiz() {
                           </View>
                         )}
                         <Text className="text-white text-[30px]">
-                          {item.title}
+                          {item.title.length > 25
+                            ? item.title.slice(1, 25) + "..."
+                            : item.title}
                         </Text>
                         <Text className="text-[#ffffff9a] text-[14px]">
-                          {item.description}
+                          {item.description.length > 95
+                            ? item.description.slice(1, 95) + "..."
+                            : item.description}
                         </Text>
                       </View>
                     </TouchableOpacity>
