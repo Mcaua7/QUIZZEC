@@ -116,11 +116,15 @@ npx expo login
 
 ---
 
-## Autor
+## Autores
 
-Cauã
+Matheus Cauã
 
 GitHub: [https://github.com/Mcaua7](https://github.com/Mcaua7)
+
+Renan Soares Souza 
+
+GitHub: [https://github.com/RenanSoaresSouza](https://github.com/RenanSoaresSouza)
 
 ---
 
